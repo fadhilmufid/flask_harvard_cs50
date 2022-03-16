@@ -12,7 +12,7 @@ def register():
     name = request.form.get("name")
     dorm = request.form.get("dorm")
     if not name or not dorm:
-        return "failure"
+        return render_template("failure.html")
     return render_template("success.html")
     #TODO
 
