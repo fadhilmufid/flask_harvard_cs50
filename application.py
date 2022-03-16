@@ -7,6 +7,16 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/register", methods=["POST"])
+def register():
+    name = request.form.get("name")
+    dorm = request.form.get("dorm")
+    if not name or not dorm:
+        return "failure"
+    return render_template("success.html")
+    #TODO
+
+
 if __name__ == "__main__":
     app.run()
 
