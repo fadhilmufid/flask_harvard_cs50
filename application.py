@@ -11,8 +11,11 @@ students=[]
 def index():
     return render_template("index.html")
 
-@app.route("/registrants")
-def registrants():
+@app.route("/registered")
+def registrered():
+    file = open("registered.csv", "r")
+    reader= csv.reader(file)
+    students = list(reader)
     return render_template("registered.html", students=students)
 
 @app.route("/register", methods=["POST"])
