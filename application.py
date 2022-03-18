@@ -13,9 +13,9 @@ def index():
 
 @app.route("/registered")
 def registrered():
-    file = open("registered.csv", "r")
-    reader= csv.reader(file)
-    students = list(reader)
+    with open("registered.csv", "r") as file:
+        reader= csv.reader(file)
+        students = list(reader)
     return render_template("registered.html", students=students)
 
 @app.route("/register", methods=["POST"])
