@@ -1,6 +1,6 @@
-import smtplib
 from flask import Flask, render_template, request, redirect
 import os
+import csv
 #configure app
 app = Flask(__name__)
 
@@ -18,16 +18,12 @@ def registrants():
 @app.route("/register", methods=["POST"])
 def register():
     #TODO
-    name = request.form.get("name")
-    email = request.form.get("email")
-    dorm = request.form.get("dorm")
-    if not name or not dorm:
+    if not request.form.get("name") or not request.form.get("dorm"):
         return render_template("failure.html")
-    message = "You are Registered!"
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login("loljokurr@gmail.com", "password")
-    server.sendmail("mufidfadhil@gmail.com", email, message)
+    file = open("registered.csv", "a")
+    writer = csv.writer(file)
+    writer.writerow((request.form.get("name"),request.form.get("dorm")))
+    file.close()
     return render_template("success.html")
 
 
